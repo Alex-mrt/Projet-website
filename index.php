@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+// Pour voir les erreurs pendant que tu construis le site (à retirer à la fin)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Liste des pages qui existent
+$pages = ['home', 'planning', 'cours', 'pratique', 'inscription', 'confirmation'];
+
+$page = $_GET['page'] ?? 'home';
+
+if (!in_array($page, $pages)) {
+    $page = 'home';
+}
+
+include 'data/creneaux.php';
+include 'includes/header.php';
+include "pages/$page.php";
