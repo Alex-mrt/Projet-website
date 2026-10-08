@@ -16,10 +16,13 @@ $instrument = trim($_POST['instrument'] ?? '');
 
 <?php else: ?>
 
-    <h1>Inscription reçue ✅</h1>
+    <div class="succes-icone" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+    </div>
+    <h1>Inscription reçue</h1>
     <p>Voici le récapitulatif de ton inscription.</p>
 
-    <div class="carte">
+    <div class="carte recap">
         <div>
             <p><strong>Élève :</strong> <?= htmlspecialchars($prenom) ?> <?= htmlspecialchars($nom) ?></p>
             <p><strong>Classe :</strong> <?= htmlspecialchars($classe) ?></p>

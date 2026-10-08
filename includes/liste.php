@@ -43,7 +43,7 @@ $nb_affiches = 0;
     }
     ?>
 
-    <div class="carte">
+    <div class="carte carte-creneau reveal" data-type="<?= $c['type'] ?>">
 
         <div class="date-bloc">
             <span class="jour"><?= $jour ?></span>

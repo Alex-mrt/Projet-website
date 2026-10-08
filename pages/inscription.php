@@ -53,8 +53,7 @@ $creneau = trouverCreneau($creneaux, $id);
             </select>
         <?php endif; ?>
 
-        <br><br>
-        <button type="submit" class="btn">Valider mon inscription</button>
+        <button type="submit" class="btn btn-plein">Valider mon inscription</button>
     </form>
 
 <?php endif; ?>

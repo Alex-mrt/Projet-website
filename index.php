@@ -15,3 +15,4 @@ if (!in_array($page, $pages)) {
 include 'data/creneaux.php';
 include 'includes/header.php';
 include "pages/$page.php";
+include 'includes/footer.php';
