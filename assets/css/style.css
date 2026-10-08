@@ -456,6 +456,64 @@ input.invalide, select.invalide { border-color: var(--rose-fonce); }
 }
 @keyframes trace { to { stroke-dashoffset: 0; } }
 
+/* ===== CONNEXION / INSCRIPTION / COMPTE ===== */
+.auth { max-width: 460px; margin: 0 auto; }
+.auth-entete { text-align: center; margin-bottom: 28px; }
+.auth-entete img { width: 96px; height: auto; margin-bottom: 12px; }
+.auth-entete h1 { margin-bottom: 8px; }
+.auth-entete p { color: var(--gris); margin: 0 auto; }
+.auth-entete .btn { margin-top: 20px; }
+.auth-form { max-width: none; }
+.auth-note { margin: 14px 0 0; text-align: center; font-size: 0.85rem; color: var(--gris); }
+.auth-bascule { text-align: center; margin-top: 20px; color: var(--gris); }
+.auth-bascule a, .message a, .flash a { color: var(--rose-fonce); font-weight: 600; }
+.aide { margin: 6px 0 0; font-size: 0.82rem; color: var(--gris); }
+.champs-duo { display: flex; gap: 14px; }
+.champs-duo > div { flex: 1; min-width: 0; }
+.champs-duo label { margin-top: 0; }
+.icone-grande { width: 64px; height: 64px; margin: 0 auto 16px; }
+
+.flashs { display: flex; flex-direction: column; gap: 10px; max-width: 620px; margin: 0 auto 28px; }
+.flash {
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: var(--blanc);
+  box-shadow: var(--ombre);
+  border-left: 4px solid var(--gris);
+  animation: apparition 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.flash-succes { border-left-color: var(--vert); }
+.flash-erreur { border-left-color: var(--rose); }
+.flash-info { border-left-color: var(--noir); }
+@keyframes apparition { from { opacity: 0; transform: translateY(-8px); } }
+
+.nav-connexion { background: var(--rose); color: var(--blanc) !important; opacity: 1 !important; }
+.nav-connexion:hover { background: var(--rose-fonce) !important; }
+.nav-compte { display: inline-flex; align-items: center; gap: 8px; }
+.mini-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--rose); color: var(--blanc);
+  font-size: 0.72rem; font-weight: 700;
+}
+
+.compte-entete { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
+.compte-entete h1 { margin: 0; font-size: 1.8rem; }
+.compte-entete p { margin: 2px 0 0; color: var(--gris); }
+.compte-entete > div:nth-child(2) { flex: 1; min-width: 200px; }
+.avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--rose), var(--rose-fonce));
+  color: var(--blanc); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+  box-shadow: 0 10px 30px rgba(232, 56, 79, 0.3);
+}
+form.form-inline { background: none; box-shadow: none; padding: 0; margin: 0; max-width: none; border: 0; }
+.hero-actions-gauche { justify-content: flex-start; }
+code { background: rgba(0, 0, 0, 0.06); padding: 2px 6px; border-radius: 6px; font-size: 0.88em; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
@@ -492,4 +550,7 @@ input.invalide, select.invalide { border-color: var(--rose-fonce); }
   .carte-creneau .btn { width: 100%; }
   form { padding: 24px; border-radius: 22px; }
   .stats > div { max-width: none; }
+  .champs-duo { flex-direction: column; gap: 0; }
+  .champs-duo > div + div label { margin-top: 20px; }
+  form.form-inline { padding: 0; }
 }

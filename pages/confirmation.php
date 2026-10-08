@@ -1,40 +1,44 @@
 <?php
-// On récupère ce que l'élève a rempli dans le formulaire
-$creneau = trouverCreneau($creneaux, $_POST['id'] ?? '');
-
-$nom        = trim($_POST['nom'] ?? '');
-$prenom     = trim($_POST['prenom'] ?? '');
-$classe     = trim($_POST['classe'] ?? '');
-$instrument = trim($_POST['instrument'] ?? '');
+$id = (string) ($_GET['id'] ?? '');
+$creneau = trouverCreneau($creneaux, $id);
+$reservation = null;
+foreach (reservationsUtilisateur((int) $utilisateur['id']) as $r) {
+    if ($r['creneau_id'] === $id) {
+        $reservation = $r;
+    }
+}
 ?>
 
-<?php if ($creneau === null || $nom === '' || $prenom === '' || $classe === ''): ?>
+<?php if ($creneau === null || $reservation === null): ?>
 
-    <h1>Oups</h1>
-    <p>Les informations sont incomplètes. Merci de recommencer ton inscription.</p>
-    <a class="btn" href="index.php?page=home">Retour à l'accueil</a>
+    <h1>Aucune réservation</h1>
+    <p>Nous n&apos;avons pas trouvé cette réservation.</p>
+    <a class="btn" href="index.php?page=planning">Retour au planning</a>
 
 <?php else: ?>
 
     <div class="succes-icone" aria-hidden="true">
         <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
     </div>
-    <h1>Inscription reçue</h1>
-    <p>Voici le récapitulatif de ton inscription.</p>
+    <h1>Inscription confirmée</h1>
+    <p>Ta place est réservée. Retrouve toutes tes réservations dans ton compte.</p>
 
     <div class="carte recap">
         <div>
-            <p><strong>Élève :</strong> <?= htmlspecialchars($prenom) ?> <?= htmlspecialchars($nom) ?></p>
-            <p><strong>Classe :</strong> <?= htmlspecialchars($classe) ?></p>
+            <p><strong>Élève :</strong> <?= e($utilisateur['prenom']) ?> <?= e($utilisateur['nom']) ?></p>
+            <p><strong>Classe :</strong> <?= e($reservation['classe']) ?></p>
             <p><strong>Type :</strong> <?= $creneau['type'] === 'cours' ? 'Cours en groupe' : 'Pratique libre' ?></p>
-            <?php if ($instrument !== ''): ?>
-                <p><strong>Instrument :</strong> <?= htmlspecialchars($instrument) ?></p>
+            <?php if ($reservation['instrument']): ?>
+                <p><strong>Instrument :</strong> <?= e($reservation['instrument']) ?></p>
             <?php endif; ?>
-            <p><strong>Date :</strong> <?= dateEnFrancais($creneau['date']) ?> à <?= $creneau['heure'] ?></p>
-            <p><strong>Organisateur :</strong> <?= htmlspecialchars($creneau['organisateur']) ?></p>
+            <p><strong>Date :</strong> <?= dateEnFrancais($creneau['date']) ?> à <?= e($creneau['heure']) ?></p>
+            <p><strong>Organisateur :</strong> <?= e($creneau['organisateur']) ?></p>
         </div>
     </div>
 
-    <a class="btn" href="index.php?page=<?= $creneau['type'] ?>">Retour aux créneaux</a>
+    <div class="hero-actions hero-actions-gauche">
+        <a class="btn" href="index.php?page=compte">Mes réservations</a>
+        <a class="btn btn-secondaire" href="index.php?page=<?= e($creneau['type']) ?>">Autres créneaux</a>
+    </div>
 
 <?php endif; ?>

@@ -1,0 +1,5 @@
+# Bloque l'accès direct aux dossiers internes (config, modèles, contrôleurs, SQL...)
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(config|controllers|models|data|database|includes|pages)(/|$) - [F,L]
+RewriteRule (^|/)\. - [F,L]

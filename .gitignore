@@ -1,0 +1,4 @@
+.env*
+.vercel
+# Décommente la ligne suivante une fois tes vrais identifiants saisis, pour ne jamais les publier :
+# config/config.php

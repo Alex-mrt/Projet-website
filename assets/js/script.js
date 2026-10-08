@@ -69,12 +69,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ===== Formulaire : validation en direct + bouton de chargement =====
-  const form = document.querySelector('form');
-  if (form) {
+  const champValide = (champ) => {
+    const valeur = champ.value.trim();
+    if (valeur === '') return false;
+    const domaine = champ.dataset.domaine;
+    if (domaine && !valeur.toLowerCase().endsWith('@' + domaine)) return false;
+    if (champ.minLength > 0 && valeur.length < champ.minLength) return false;
+    if (champ.name === 'mot_de_passe_confirmation') {
+      const mdp = champ.form.querySelector('[name="mot_de_passe"]');
+      if (mdp && mdp.value !== champ.value) return false;
+    }
+    return true;
+  };
+
+  document.querySelectorAll('form').forEach((form) => {
     const champs = form.querySelectorAll('input[required], select[required]');
     champs.forEach((champ) => {
       const verifier = () => {
-        const ok = champ.value.trim() !== '';
+        const ok = champValide(champ);
         champ.classList.toggle('valide', ok);
         champ.classList.toggle('invalide', !ok);
       };
@@ -84,10 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (event) => {
+      const message = form.dataset.confirmer;
+      if (message && !window.confirm(message)) {
+        event.preventDefault();
+        return;
+      }
       const bouton = form.querySelector('button[type="submit"]');
-      bouton.classList.add('chargement');
-      bouton.textContent = 'Envoi en cours…';
+      if (bouton) {
+        bouton.classList.add('chargement');
+        bouton.disabled = true;
+        bouton.textContent = 'Envoi en cours…';
+      }
     });
-  }
+  });
 });

@@ -26,6 +26,9 @@ $creneaux_bruts = [
 
 ];
 
+// Liste des instruments proposés pour la pratique libre (modifie-la comme tu veux)
+$instruments = ['Guitare', 'Basse', 'Piano', 'Batterie', 'Chant', 'Violon', 'Autre'];
+
 // ---- Ne pas toucher en dessous ----
 
 $creneaux = [];
@@ -37,7 +40,7 @@ foreach ($creneaux_bruts as $c) {
         continue;
     }
     $c['id'] = $c['date'] . '_' . $c['heure'] . '_' . $c['type'];
-    $c['inscrits'] = 0; // pour l'instant 0, on branchera la base de données plus tard
+    $c['inscrits'] = 0; // remplacé par le vrai nombre (base de données) dans index.php
     $creneaux[] = $c;
 }
 

@@ -38,8 +38,24 @@ $liens = [
             <?php foreach ($liens as $cle => $texte): ?>
                 <a href="index.php?page=<?= $cle ?>"<?= $page === $cle ? ' class="actif" aria-current="page"' : '' ?>><?= $texte ?></a>
             <?php endforeach; ?>
+
+            <?php if (!empty($utilisateur)): ?>
+                <a href="index.php?page=compte" class="nav-compte<?= $page === 'compte' ? ' actif' : '' ?>"<?= $page === 'compte' ? ' aria-current="page"' : '' ?>>
+                    <span class="mini-avatar" aria-hidden="true"><?= e(mb_strtoupper(mb_substr($utilisateur['prenom'], 0, 1))) ?></span>
+                    Mon compte
+                </a>
+            <?php else: ?>
+                <a href="index.php?page=connexion" class="nav-connexion">Se connecter</a>
+            <?php endif; ?>
         </nav>
     </div>
 </header>
 
 <main>
+<?php if (!empty($flashs)): ?>
+    <div class="flashs" role="status">
+        <?php foreach ($flashs as $f): ?>
+            <div class="flash flash-<?= e($f['type']) ?>"><?= $f['message'] ?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
